@@ -36,6 +36,11 @@ public class LoginController extends BaseController {
         return "login";
     }
 
+    @RequestMapping("/register")
+    public String registering(){
+        return "register";
+    }
+
     @RequestMapping("/loging")
     public String loging(String userName,String password,RedirectAttributes redirectAttributes,HttpServletRequest request){
         if (Validator.isEmpty(userName) || Validator.isEmpty(password)){
@@ -61,6 +66,24 @@ public class LoginController extends BaseController {
         }
         return REDIRECT+"/login";
     }
+
+
+    @RequestMapping("/registering")
+    public String register(String userName,String password,RedirectAttributes redirectAttributes,HttpServletRequest request){
+        if (Validator.isEmpty(userName) || Validator.isEmpty(password)){
+            redirectAttributes.addFlashAttribute("message","用户名密码不得为空!");
+            return REDIRECT+"/register";
+        }
+        TAdmin admin = adminService.selectUsername(userName);
+        if (Validator.isNotEmpty(admin)){
+            redirectAttributes.addFlashAttribute("message","用户名已存在，请重新注册!");
+            return REDIRECT+"/register";
+        }
+        adminService.register(userName, password);
+        redirectAttributes.addFlashAttribute("message","注册成功，跳转到登录页面!");
+        return "login";
+    }
+
 
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request){

@@ -52,5 +52,11 @@ public interface TAdminDao extends BaseMapper<TAdmin> {
 
     @Select("select count(*) from javatravel.t_admin")
     int selectCount();
+
+    @Select("select * from javatravel.t_admin where username = #{userName}")
+    TAdmin selectUsername(@Param("userName") String userName);
+
+    @Insert("insert into javatravel.t_admin (username,password) values (#{username},#{password})")
+    int register(@Param("username") String username, @Param("password") String password);
 }
 

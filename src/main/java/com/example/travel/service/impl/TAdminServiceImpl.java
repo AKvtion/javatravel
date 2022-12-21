@@ -31,6 +31,11 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminDao, TAdmin> implements
     }
 
     @Override
+    public int register(String username, String password) {
+        return tAdminDao.register(username,password);
+    }
+
+    @Override
     public List<TAdmin> selectAll() {
         List<TAdmin> tAdmins = tAdminDao.selectAll();
         return tAdmins;
@@ -77,6 +82,11 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminDao, TAdmin> implements
         }
         PageInfo<TAdmin> pageInfo = new PageInfo<>(list);
         return pageInfo.getList();
+    }
+
+    @Override
+    public TAdmin selectUsername(String userName) {
+        return tAdminDao.selectUsername(userName);
     }
 
 }

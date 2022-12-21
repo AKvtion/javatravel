@@ -17,6 +17,8 @@ import java.util.List;
 public interface TAdminService extends IService<TAdmin> {
     TAdmin login(String username,String password);
 
+    int register(String username,String password);
+
     List<TAdmin> selectAll();
 
     int delId(Integer id);
@@ -32,5 +34,7 @@ public interface TAdminService extends IService<TAdmin> {
     TAdmin findByUserName(String username);
 
     List<TAdmin> findByPage(int pageNumber, int pageSize, String query);
+
+    TAdmin selectUsername(String userName);
 }
 
